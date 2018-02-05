@@ -47,18 +47,13 @@ export class ShortAnswer extends Component { // eslint-disable-line react/prefer
   }
 
   componentWillUnmount() {
-    console.log("------componentWillUnmount");
 
   }
 
   onAddMath = ()=> {
-      // const math = [{ content: `<latex> ${this.mathFieldSpan.textContent} </latex>` }];
-
-      console.log("-------------onaddMath", this.mathField.latex());
       var mathContent = [{ content: this.mathField.latex() }];
       var newInputs = [...this.state.content, ...mathContent];
       this.setState({ content: newInputs });
-
       this.mathField.latex('');
 
 
@@ -70,24 +65,14 @@ export class ShortAnswer extends Component { // eslint-disable-line react/prefer
     var objectFound = this.state.content[elementPos];
 
     let mathContent = this.state.content;
-    console.log(mathContent.splice(elementPos, 1));
-    //this code allows to delete beyond the last one
-
-
-    console.log(mathContent)
-
     this.setState({ content: [...mathContent] })
-    console.log("------new state (minus deleted step) is set");
 
 
 
   }
 
   displayMath(inputs) {
-    console.log("------rendering added math");
-    console.log(inputs);
-//
-// {this.state[index] ? <MathQuillDisplay content={input.content} onDelete={this.onDeleteMath(index)} /> : null}
+
     var currentSteps = inputs.map((input, index) => (
       <div ref={(step)=>{this.newStep = step }} key={index}>
          <MathQuillDisplay content={input.content} onDelete={this.onDeleteMath(input.content)} index={index} />
@@ -104,8 +89,6 @@ export class ShortAnswer extends Component { // eslint-disable-line react/prefer
       <div>
       <br/>
       <br/>
-
-
         <Card>
           {this.displayMath(this.state.content)}
           <br />
